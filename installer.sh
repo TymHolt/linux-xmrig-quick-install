@@ -23,22 +23,22 @@ echo "(2) Advanced build"
 echo "(3) Cancel..."
 read -p $'\n'"Select build option: " vbuildoption
 
-if [[ ${vbuildoption,,} = "basic build" || ${vbuildoption,,} = "basic"]] then
+if [[ ${vbuildoption,,} = "basic build" || ${vbuildoption,,} = "basic" ]]; then
 	$vbuildoption = "1"
 fi
 
-if [[ ${vbuildoption,,} = "advance build" || ${vbuildoption,,} = "advanced" ]] then
+if [[ ${vbuildoption,,} = "advance build" || ${vbuildoption,,} = "advanced" ]]; then
 	$vbuildoption = "2"
 fi
 
-if [[ !($vbuildoption = "1" || $vbuildoption = "2") ]] then
+if [[ !($vbuildoption = "1" || $vbuildoption = "2") ]]; then
 	cancel
 fi
 
 # Ask for config
 read -p $'\n'"Create new config? ((Y)es / (N)o): " vcreateconfig
 
-if [[ ${vcreateconfig,,} = "y" || ${vcreateconfig,,} = "yes" ]] then
+if [[ ${vcreateconfig,,} = "y" || ${vcreateconfig,,} = "yes" ]]; then
 	# Create config file
 	read -p "Mining pool URL: " vpoolurl
 	read -p "Wallet address: " vwalletaddress
@@ -49,7 +49,7 @@ echo "Cloning repositories..."
 sudo apt install git build-essential cmake libuv1-dev libssl-dev libhwloc-dev
 git clone https://github.com/xmrig/xmrig.git
 
-if [[ $vbuildoption = "2" ]] then
+if [[ $vbuildoption = "2" ]]; then
 	echo "Advanced build..."
 	mkdir xmrig/build && cd xmrig/scripts
 	./build_deps.sh && cd ../build
@@ -63,7 +63,7 @@ fi
 make -j$(nproc)
 
 # Create config (if selected)
-if [[ ${vcreateconfig,,} = "y" || ${vcreateconfig,,} = "yes" ]] then
+if [[ ${vcreateconfig,,} = "y" || ${vcreateconfig,,} = "yes" ]]; then
 	echo "Creating config..."
 	echo "{" >> config.json
 	echo $'\t'"\"autosave\": true," >> config.json
