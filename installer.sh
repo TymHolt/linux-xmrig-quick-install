@@ -42,6 +42,7 @@ if [[ ${vcreateconfig,,} = "y" || ${vcreateconfig,,} = "yes" ]]; then
 	# Create config file
 	read -p "Mining pool URL: " vpoolurl
 	read -p "Wallet address: " vwalletaddress
+	read -p "Worker name: " vworkername
 fi
 
 # Get and build repositories according to https://xmrig.com/docs/miner/build/ubuntu
@@ -73,7 +74,7 @@ if [[ ${vcreateconfig,,} = "y" || ${vcreateconfig,,} = "yes" ]]; then
 	echo $'\t'"\"pools\": [" >> config.json
 	echo $'\t\t'"{" >> config.json
 	echo $'\t\t\t'"\"url\": \"$vpoolurl\"," >> config.json
-	echo $'\t\t\t'"\"user\": \"$vwalletaddress.worker0\"," >> config.json
+	echo $'\t\t\t'"\"user\": \"$vwalletaddress.$vworkername\"," >> config.json
 	echo $'\t\t\t'"\"pass\": \"x\"," >> config.json
 	echo $'\t\t\t'"\"keepalive\": true," >> config.json
 	echo $'\t\t\t'"\"tls\": false" >> config.json
@@ -84,6 +85,7 @@ fi
 
 # Ask to install to system
 # Copy binary and config.json to /usr/local/bin
+# Todo config options for 1gb/huge pages
 
 # Return to original directory
 cd ../../
